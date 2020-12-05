@@ -1,8 +1,11 @@
 package com.example;
 
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 @Service("genericEventListener")
 public class GenericEventListener{
@@ -20,6 +23,12 @@ public class GenericEventListener{
     public void handleSuccessfulAsync(GenericSpringEvent<String> event) throws InterruptedException {
         //Thread.sleep(5000);
         System.out.println("Handling async annotation generic event (conditional)："+event.getWhat());
+    }
+
+    @TransactionalEventListener(classes = GenericSpringEvent.class)
+    @Async
+    public void handleTransactionCommit(GenericSpringEvent<String> event) throws InterruptedException {
+        System.out.println("Handling Transaction commit!!!"+ event.getWhat());
     }
 
 }

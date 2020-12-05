@@ -9,11 +9,13 @@ import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
+@EnableTransactionManagement
 @SpringBootApplication
 public class SpringEventConfiguration {
 
@@ -57,6 +59,7 @@ public class SpringEventConfiguration {
         executor.initialize();
         return executor;
     }
+
 
 
 }
